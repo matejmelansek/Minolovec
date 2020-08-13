@@ -8,17 +8,22 @@ NAPAKA = "N"
 
 class Celica:
 
-    def __init__(self, vrstica, stolpec, mina, odprta=False):
+    def __init__(self, vrstica, stolpec, mina, odprta=False, zastavica=False):
         self.vrstica = vrstica
         self.stolpec = stolpec
         self.mina = mina
         self.odprta = odprta
+        self.zastavica = zastavica
         return
 
     def odpri(self):
         self.odprta = True
         return
     
+    def postavi_zastavico(self):
+        self.zastavica = not self.zastavica
+        return
+
     def postavi_mino(self):
         self.mina = True
         return
@@ -57,10 +62,15 @@ class Mreza:
                 return True
         return False
 
-
+    def postavi_zastavico(self, vrsta, stolpec):
+        celica = self.postavitev_min[vrsta][stolpec]
+        if celica.odprta == False:
+            celica.postavi_zastavico()
 
     def odpri(self, vrstica, stolpec):
         celica = self.postavitev_min[vrstica][stolpec]
+        if celica.zastavica == True:
+            return
         if celica.odprta == False:
             celica.odpri()
             if self.mine_v_okolici(vrstica, stolpec) == 0:
