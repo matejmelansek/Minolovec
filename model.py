@@ -62,8 +62,8 @@ class Mreza:
                 return True
         return False
 
-    def postavi_zastavico(self, vrsta, stolpec):
-        celica = self.postavitev_min[vrsta][stolpec]
+    def postavi_zastavico(self, vrstica, stolpec):
+        celica = self.postavitev_min[vrstica][stolpec]
         if celica.odprta == False:
             celica.postavi_zastavico()
 
@@ -91,6 +91,20 @@ class Mreza:
                     return False
         return True
 
+    def ugibaj(self, vrstica, stolpec, zastavica):
+        if not (vrstica.is_integer() and stolpec.is_integer()):
+            return NAPAKA
+        if self.je_na_mrezi(vrstica, stolpec) == False:
+            return NAPAKA
+        celica = self.postavitev_min[vrstica][stolpec]
+        if celica.odprta == True:
+            return NAPAKA
+        elif celica.zastavica == False:
+            self.odpri(vrstica, stolpec)
+            if self.poraz():
+                return PORAZ
+            if self.zmaga():
+                return ZMAGA
 
 def ustvari_mrezo(st_vrstic, st_stolpcev, st_min):
     mreza = []
@@ -114,16 +128,16 @@ def ustvari_mrezo(st_vrstic, st_stolpcev, st_min):
     return mreza
 
 def nova_igra(st_vrstic, st_stolpcev, st_min):
-    if not st_vrstic.isdigit():
+    if not st_vrstic.is_integer():
         return NAPAKA
-    if not st_stolpcev.isdigit():
+    if not st_stolpcev.is_integer():
         return NAPAKA
-    if not st_min.isdigit():
+    if not st_min.is_integer():
         return NAPAKA
 
     velikost_mreze = int(st_vrstic) * int(st_stolpcev)
     mine = int(st_min)
-    if mine > velikost_mreze:
+    if mine > velikost_mreze - 2:
         return NAPAKA
     else:    
         nova_mreza = ustvari_mrezo(st_vrstic, st_stolpcev, st_min)
@@ -137,16 +151,14 @@ class Minolovec:
         self.igre = {}
     
     def prost_id_igre(self):
-        if self.igre == {}:
+        if len(self.igre) == 0:
             return 0
         else:
-            for i in range(len(self.igre) + 1):
-                if i not in self.igre.keys():
-                    return i
+            return max(self.igre.keys()) + 1
 
     def nova_igra(self, st_vrstic, st_stolpcev, st_min):
-        nov_id = self.prost_id_igre()
+        id_igre = self.prost_id_igre()
         mreza = ustvari_mrezo(st_vrstic, st_stolpcev, st_min)
         igra = Mreza(mreza)
-        self.igre[nov_id] = [igra, st_vrstic, st_stolpcev, st_min, ZACETEK]
-        return nov_id
+        self.igre[id_igre] = [igra, st_vrstic, st_stolpcev, st_min, ZACETEK]
+        return id_igre
