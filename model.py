@@ -137,7 +137,9 @@ def nova_igra(st_vrstic, st_stolpcev, st_min):
 
     velikost_mreze = int(st_vrstic) * int(st_stolpcev)
     mine = int(st_min)
-    if mine > velikost_mreze - 2:
+    if mine > velikost_mreze - 1:
+        return NAPAKA
+    if not (1 < st_vrstic <= 24 and  1 < st_stolpcev <= 30 and 0 < mine <= 668):
         return NAPAKA
     else:    
         nova_mreza = ustvari_mrezo(st_vrstic, st_stolpcev, st_min)
