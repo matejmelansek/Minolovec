@@ -21,8 +21,11 @@ class Celica:
         return
     
     def postavi_zastavico(self):
-        self.zastavica = not self.zastavica
-        return
+        if self.zastavica == True:
+            self.zastavica = False
+        else:
+            self.zastavica = True
+
 
     def postavi_mino(self):
         self.mina = True
@@ -92,19 +95,24 @@ class Mreza:
         return True
 
     def ugibaj(self, vrstica, stolpec, zastavica):
-        if not (vrstica.is_integer() and stolpec.is_integer()):
+        if not (vrstica.isdigit() and stolpec.isdigit()):
             return NAPAKA
-        if self.je_na_mrezi(vrstica, stolpec) == False:
-            return NAPAKA
-        celica = self.postavitev_min[vrstica][stolpec]
-        if celica.odprta == True:
-            return NAPAKA
-        elif celica.zastavica == False:
-            self.odpri(vrstica, stolpec)
-            if self.poraz():
-                return PORAZ
-            if self.zmaga():
-                return ZMAGA
+        else:
+            vrstica1 = int(vrstica) - 1
+            stolpec1 = int(stolpec) - 1
+            if self.je_na_mrezi(vrstica1, stolpec1) == False:
+                return NAPAKA
+            celica = self.postavitev_min[vrstica1][stolpec1]
+            if zastavica == True:
+                celica.postavi_zastavico()
+            elif celica.odprta == True:
+                return NAPAKA
+            elif celica.zastavica == False:
+                self.odpri(vrstica1, stolpec1)
+                if self.poraz():
+                    return PORAZ
+                if self.zmaga():
+                    return ZMAGA
 
 def ustvari_mrezo(st_vrstic, st_stolpcev, st_min):
     mreza = []
@@ -128,21 +136,21 @@ def ustvari_mrezo(st_vrstic, st_stolpcev, st_min):
     return mreza
 
 def nova_igra(st_vrstic, st_stolpcev, st_min):
-    if not st_vrstic.is_integer():
+    if not st_vrstic.isdigit():
         return NAPAKA
-    if not st_stolpcev.is_integer():
+    if not st_stolpcev.isdigit():
         return NAPAKA
-    if not st_min.is_integer():
+    if not st_min.isdigit():
         return NAPAKA
 
     velikost_mreze = int(st_vrstic) * int(st_stolpcev)
     mine = int(st_min)
     if mine > velikost_mreze - 1:
         return NAPAKA
-    if not (1 < st_vrstic <= 24 and  1 < st_stolpcev <= 30 and 0 < mine <= 668):
+    if not (1 < int(st_vrstic) <= 24 and  1 < int(st_stolpcev) <= 30 and 0 < mine <= 668):
         return NAPAKA
     else:    
-        nova_mreza = ustvari_mrezo(st_vrstic, st_stolpcev, st_min)
+        nova_mreza = ustvari_mrezo(int(st_vrstic), int(st_stolpcev), int(st_min))
         return Mreza(nova_mreza)
 
 

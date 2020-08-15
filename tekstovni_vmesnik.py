@@ -1,32 +1,38 @@
-import model
+from model import *
 
-POMOČ = 'Minolovec je igra, kjer poskušamo počistiti minsko polje, tako da poiščemo\n'
-' in odpremo vsa prazna mesta, mesta z minami pa pustimo na miru.\n'
-' Igra se konča če počistimo minsko polje, ali če pomotoma odpremo mino.\n'
-' Igro začnete tako, da vpišete želeno število vrstic, pritisnete presledek,\n'
+POMOČ = ('Minolovec je igra, kjer poskušamo počistiti minsko polje, tako da poiščemo\n'
+'in odpremo vsa prazna mesta, mesta z minami pa pustimo na miru.\n'
+'Igra se konča če počistimo minsko polje, ali če pomotoma odpremo mino.\n'
+'Igro začnete tako, da vpišete želeno število vrstic, pritisnete presledek,\n'
 'nato vpišete želeno število stolpcec in po presledku še število min.\n'
-'Velikost mreže ne sme presegati 24x30, min pa ne sme biti več kot 668.'
+'Velikost mreže ne sme presegati 24x30, min pa ne sme biti več kot 668.')
 
 def zacetek():
     return input('===================================================\n'
                  'Dobrodošli v igri minolovca! Za pomoč pritisnite p.\n'
                  'Prosim vnesite želeno velikost mreže in število min:\n'
-                 '==================================================='
+                 '===================================================\n'
     )
 
 def izpis_igre(igra):
-    mreza = '   '
+    mreza = '      '
     for stolpec in range(len(igra.postavitev_min[0])):
-        mreza += str(stolpec + 1) + '  ' 
+        if stolpec <= 7:
+            mreza += str(stolpec + 1) + '  '
+        else:
+            mreza += str(stolpec + 1) + ' '
     mreza += '\n\n'
     for vrstica in range(len(igra.postavitev_min)):
         vrsta = ''
-        for stoplec in range(len(igra.postavitev_min[0])):
+        for stolpec in range(len(igra.postavitev_min[0])):
             vrsta += str(izpis_celice(igra, vrstica, stolpec)) + '  '
-        mreza += str(vrstica) + '  ' + vrsta + '\n'
+        if vrstica <= 8:
+            mreza += str(vrstica + 1) + '     ' + vrsta + '\n'
+        else:
+            mreza += str(vrstica + 1) + '    ' + vrsta + '\n'
     return mreza
 
-def izpis_celice(igra, vrstica, stoplec):
+def izpis_celice(igra, vrstica, stolpec):
     celica = igra.postavitev_min[vrstica][stolpec]
     if celica.mina == True and celica.odprta == True:
         return 'M'
@@ -41,22 +47,22 @@ def izpis_celice(igra, vrstica, stoplec):
         return 'X'
 
 
-def izpis_zmage(igra):
+def izpis_zmage():
     return '\n Čestitke, dobili ste igro!'  
 
-def izpis_poraza(igra):
+def izpis_poraza():
     return '\n Žal ste to igro izgubili. \n ' 'Več sreče prihodnjič'
 
-def izpis_napake(igra):
+def izpis_napake():
     return 'Nepravilen vnos. Za pomoč pritisni p.'
 
 def pravilen_vnos(igra, vnos):
-    vnos1 = vnos.split('')
+    vnos1 = vnos.split(' ')
     if len(vnos1) == 2:
         v = vnos1[0]
         s = vnos1[1]
-        if v.is_integer() and s.is_integer():
-            if 0 <= v < len(igra.postavitev_min) and 0 <= s < len(igra.postavitev_min[0]):
+        if v.isdigit() and s.isdigit():
+            if 0 <= int(v) < len(igra.postavitev_min) + 1 and 0 <= int(s) < len(igra.postavitev_min[0]) + 1:
                 return True
         else:
             return False
@@ -64,20 +70,10 @@ def pravilen_vnos(igra, vnos):
         v = vnos1[0]
         s = vnos1[1]
         f = vnos1[2]
-        if v.is_integer() and s.is_integer():
-            if 0 <= v < len(igra.postavitev_min) and 0 <= s < len(igra.postavitev_min[0]):
+        if v.isdigit() and s.isdigit():
+            if 0 <= int(v) < len(igra.postavitev_min) and 0 <= int(s) < len(igra.postavitev_min[0]):
                 if f == 'f' or 'F':
                     return True
-    return False
-
-def pravilna_velikost(sez):
-    sez1 = sez.split('')
-    if len(sez1) != 3:
-        return False
-    elif not (sez1[0].is_integer and sez1[1].is_integer and sez1[2].is_integer):
-        return False
-    elif 1 < sez1[0] <= 24 and  1 < sez1[1] <= 30 and 0 < sez[2] <= 668:
-        return True 
     return False
 
 def zahtevaj_vnos(igra):
@@ -85,52 +81,54 @@ def zahtevaj_vnos(igra):
     while pravilen_vnos(igra, vnos) == False:
         vnos = input('Nepravilen vnos. Najprej vnesi število vrstice in nato še število stolpca, loči ju s presledkom.\n'
         'Če želiš na celico postaviti zastavico dodaj še črko f:')
-    vnos1 = vnos.split('')
-    vrstica = int(vnos1[0])
-    stolpec = int(vnos1[1])
-    zastavica = False
-    celica = igra.postavitev_min[vrstica][stolpec]
+    vnos1 = vnos.split(' ')
+    vrstica = vnos1[0]
+    stolpec = vnos1[1]
+    #celica = igra.postavitev_min[int(vrstica)][int(stolpec)]
     if len(vnos1) == 3:
-        if celica.zastavica == True:
-            zastavica = False
-        else:
-            zastavica = True
-    return (vrstica, stolpec, zastavica)
+        return [vrstica, stolpec, True]
+    return [vrstica, stolpec, False]
 
 def pozeni_vmesnik():
     velikost_mreze = zacetek()
-    igra = model.nova_igra(velikost_mreze)
-    while True:
-        if velikost_mreze.pravilna_velikost() == False:
-            print(izpis_napake(igra))
-            pozeni_vmesnik()
-        if velikost_mreze == 'p':
-            print(POMOČ)
-            pozeni_vmesnik()
-        if model.nova_igra(velikost_mreze) == 'F':
-            print(izpis_napake(igra))
+    if velikost_mreze == 'p':
+        print(POMOČ)
+        pozeni_vmesnik()
+    else:
+        velikost_mreze1 = velikost_mreze.split(' ')
+        if len(velikost_mreze1) != 3:
+            print(izpis_napake())
             pozeni_vmesnik()
         else:
-            print(izpis_igre(igra))
-            poskus = zahtevaj_vnos(igra)
-            rezultat_ugiba = igra.ugibaj(poskus)
-            if igra.ugibaj(poskus) =='F':
-                print(izpis_napake(igra))
-            if rezultat_ugiba == model.ZMAGA:
-                print(izpis_igre(igra))
-                print(izpis_zmage(igra))
-                ponovni_zagon = input('Za ponovni zagon vpišite 1.\n').strip()
-                if ponovni_zagon == '1':
-                    igra = model.nova_igra()
+            v = velikost_mreze1[0]
+            s = velikost_mreze1[1]
+            m = velikost_mreze1[2]
+            igra = nova_igra(v, s, m)
+            while True:
+                if  nova_igra(v, s, m) == 'N':
+                    print(izpis_napake())
+                    pozeni_vmesnik()
                 else:
-                    break
-            if rezultat_ugiba == model.PORAZ:
-                print(izpis_igre(igra))
-                print(izpis_poraza(igra))
-                ponovni_zagon = input('Za ponovni zagon vpišite 1.\n').strip()
-                if ponovni_zagon == '1':
-                    igra = model.nova_igra()
-                else:
-                    break
+                    print(izpis_igre(igra))
+                    poskus = zahtevaj_vnos(igra)
+                    rezultat_ugiba = igra.ugibaj(poskus[0], poskus[1], poskus[2])
+                    if rezultat_ugiba =='N':
+                        print(izpis_napake())
+                    if rezultat_ugiba == ZMAGA:
+                        print(izpis_igre(igra))
+                        print(izpis_zmage())
+                        ponovni_zagon = input('Za ponovni zagon vpišite 1.\n')
+                        if ponovni_zagon == '1':
+                            pozeni_vmesnik()
+                        else:
+                            break
+                    if rezultat_ugiba == PORAZ:
+                        print(izpis_igre(igra))
+                        print(izpis_poraza())
+                        ponovni_zagon = input('Za ponovni zagon vpišite 1. \n')
+                        if ponovni_zagon == '1':
+                            pozeni_vmesnik()
+                        else:
+                            break
 
-pozeni_vmesnik()  
+pozeni_vmesnik()
