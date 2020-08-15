@@ -172,3 +172,8 @@ class Minolovec:
         igra = Mreza(mreza)
         self.igre[id_igre] = [igra, st_vrstic, st_stolpcev, st_min, ZACETEK]
         return id_igre
+    
+    def ugibaj(self, id_igre, vrstica, stolpec, zastavica):
+        [igra, st_vrstic, st_stolpcev, st_min, stanje] = self.igre[id_igre]
+        poskus = igra.ugibaj(vrstica, stolpec, zastavica)
+        self.igre[id_igre] = [igra, st_vrstic, st_stolpcev, st_min, poskus]
