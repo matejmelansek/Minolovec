@@ -8,7 +8,7 @@ minolovec = Minolovec()
 def index():
     return bottle.template('index.tpl')
 
-@bottle.post('/nova_igra')
+@bottle.post('/nova_igra/')
 def nova_igra1():
     tezavnost = bottle.request.getunicode('tezavnost')
     if tezavnost == 'Začetnik':
@@ -45,7 +45,7 @@ def ugibaj():
     stolpec = int(celica[1])
     zastavica = celica[2]
     minolovec.ugibaj(id_igre, vrstica, stolpec, zastavica)
-    bottle.redirect('/igra')
+    bottle.redirect('/igra/')
 
 
 bottle.run(reloader=True, debug=True)

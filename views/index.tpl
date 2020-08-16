@@ -9,19 +9,19 @@
     </p>
 
     <form action='/nova_igra/' method='post'>
-        <input type='button' id='tezavnost' name='Začetnik' value='Začetnik'>
+        <input type='button' name='tezavnost' value='Začetnik'>
     </form>
     <form action='/nova_igra/' method='post'>
-        <input type='button' id='tezavnost' name='Poznavalec' value='Poznavalec'>
+        <input type='button' name='tezavnost' value='Poznavalec'>
     </form>
     <form action='/nova_igra/' method='post'>
-        <input type='button' id='tezavnost' name='Profesionalec' value='Profesionalec'>
+        <input type='button' name='tezavnost' value='Profesionalec'>
     </form>
     <form action='/nova_igra/' method='post'>
-        <input type='text' id='polj_tez_vrstice' name='polj_tez_vrstice' value='Število vrstic:'>
-        <input type='text' id='polj_tez_stolpci' name='polj_tez_vrstice' value='Število stolpcev:'>
-        <input type='text' id='polj_tez_mine' name='polj_tez_vrstice' value='Število min:'>
-        <input type='submit' id='Po meri' name='Po meri' value='Po meri'>
+        <input type='text' name='polj_tez_vrstice' value='Število vrstic:'>
+        <input type='text' name='polj_tez_vrstice' value='Število stolpcev:'>
+        <input type='text' name='polj_tez_vrstice' value='Število min:'>
+        <input type='submit' name='tezavnost' value='Po meri'>
     </form>
 
     
