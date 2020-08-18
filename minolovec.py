@@ -48,7 +48,7 @@ def ugibaj():
 
 @bottle.post('/igra/')
 def postavljaj_zastavice():
-    bottle.request.forms(postavljaj_zastavice)
+    bottle.request.forms('postavljaj_zastavice')
     bottle.redirect('/igra_zastavice/')
 
 @bottle.get('/igra_zastavice/')
