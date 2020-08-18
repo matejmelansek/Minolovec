@@ -10,7 +10,7 @@ def index():
 
 @bottle.post('/nova_igra/')
 def nova_igra():
-    for tezavnost in bottle.request.forms.getall['tezavnost']:
+    for tezavnost in bottle.request.forms.getall('tezavnost'):
         if tezavnost == 'Začetnik':
             st_vrstic = 9
             st_stolpcev = 9
@@ -40,12 +40,30 @@ def pokazi_igro():
 @bottle.post('/igra/')
 def ugibaj():
     id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
-    celica = bottle.request.getunicode('celica')
-    vrstica = int(celica[0])
-    stolpec = int(celica[1])
-    zastavica = celica[2]
-    minolovec.ugibaj(id_igre, vrstica, stolpec, zastavica)
+    celica = bottle.request.getunicode('celica').split(' ')
+    vrstica = int(celica[0]) + 1
+    stolpec = int(celica[1]) + 1
+    minolovec.ugibaj(id_igre, vrstica, stolpec, False)
     bottle.redirect('/igra/')
 
+@bottle.post('/igra/')
+def postavljaj_zastavice():
+    bottle.request.forms(postavljaj_zastavice)
+    bottle.redirect('/igra_zastavice/')
+
+@bottle.get('/igra_zastavice/')
+def igra_zastavice():
+    id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
+    [igra, st_vrstic, st_stolpcev, st_min, stanje] = minolovec.igre[id_igre]
+    return bottle.template('igra_zastavice.tpl', igra=igra, stanje=stanje, id_igre=id_igre, st_vrstic=st_vrstic, st_stolpcev=st_stolpcev, st_min=st_min)
+
+@bottle.post('/igra_zastavice/')
+def postavi_zastavico():
+    id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
+    celica = bottle.request.getunicode('celica').split(' ')
+    vrstica = int(celica[0]) + 1
+    stolpec = int(celica[1]) + 1
+    minolovec.ugibaj(id_igre, vrstica, stolpec, True)
+    bottle.redirect('/igra_zastavice/')
 
 bottle.run(reloader=True, debug=True)

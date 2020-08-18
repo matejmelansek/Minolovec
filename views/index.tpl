@@ -19,8 +19,8 @@
     </form>
     <form action='/nova_igra/' method='post'>
         <input type='text' name='polj_tez_vrstice' value='Število vrstic:'>
-        <input type='text' name='polj_tez_vrstice' value='Število stolpcev:'>
-        <input type='text' name='polj_tez_vrstice' value='Število min:'>
+        <input type='text' name='polj_tez_stolpci' value='Število stolpcev:'>
+        <input type='text' name='polj_tez_mine' value='Število min:'>
         <input type='submit' name='tezavnost' value='Po meri'>
     </form>
 
