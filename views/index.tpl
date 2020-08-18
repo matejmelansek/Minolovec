@@ -9,13 +9,13 @@
     </p>
 
     <form action='/nova_igra/' method='post'>
-        <input type='button' name='tezavnost' value='Začetnik'>
+        <input type='submit' name='tezavnost' value='Začetnik'>
     </form>
     <form action='/nova_igra/' method='post'>
-        <input type='button' name='tezavnost' value='Poznavalec'>
+        <input type='submit' name='tezavnost' value='Poznavalec'>
     </form>
     <form action='/nova_igra/' method='post'>
-        <input type='button' name='tezavnost' value='Profesionalec'>
+        <input type='submit' name='tezavnost' value='Profesionalec'>
     </form>
     <form action='/nova_igra/' method='post'>
         <input type='text' name='polj_tez_vrstice' value='Število vrstic:'>

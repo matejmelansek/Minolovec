@@ -10,7 +10,7 @@ def index():
 
 @bottle.post('/nova_igra/')
 def nova_igra():
-    for tezavnost in bottle.request.forms.getall('tezavnost'):
+    for tezavnost in bottle.request.forms['tezavnost']:
         if tezavnost == 'Začetnik':
             st_vrstic = 9
             st_stolpcev = 9
@@ -24,9 +24,9 @@ def nova_igra():
             st_stolpcev = 30
             st_min = 99
         if tezavnost == 'Po meri':
-            st_vrstic = bottle.request.forms.get('polj_tez_vrstice')
-            st_stolpcev = bottle.request.forms.get('polj_tez_stolpci')
-            st_min = bottle.request.forms.get('polj_tez_mine')
+            st_vrstic = bottle.request.forms['polj_tez_vrstice']
+            st_stolpcev = bottle.request.forms['polj_tez_stolpci']
+            st_min = bottle.request.forms['polj_tez_mine']
     id_igre = minolovec.nova_igra(st_vrstic, st_stolpcev, st_min)
     bottle.response.set_cookie('idigre', 'idigre{}'.format(id_igre), secret=SKRIVNOST, path='/')
     bottle.redirect('/igra/')

@@ -1,6 +1,8 @@
 from model import *
+import sys
 
-POMOČ = ('Minolovec je igra, kjer poskušamo počistiti minsko polje, tako da poiščemo\n'
+POMOČ = ('\n'
+'Minolovec je igra, kjer poskušamo počistiti minsko polje, tako da poiščemo\n'
 'in odpremo vsa prazna mesta, mesta z minami pa pustimo na miru.\n'
 'Igra se konča če počistimo minsko polje, ali če pomotoma odpremo mino.\n'
 'Igro začnete tako, da vpišete želeno število vrstic, pritisnete presledek,\n'
@@ -8,7 +10,8 @@ POMOČ = ('Minolovec je igra, kjer poskušamo počistiti minsko polje, tako da p
 'Velikost mreže ne sme presegati 24x30, min pa ne sme biti več kot 668.')
 
 def zacetek():
-    return input('===================================================\n'
+    return input('\n'
+                 '===================================================\n'
                  'Dobrodošli v igri minolovca! Za pomoč pritisnite p.\n'
                  'Prosim vnesite želeno velikost mreže in število min:\n'
                  '===================================================\n'
@@ -54,7 +57,7 @@ def izpis_poraza():
     return '\n Žal ste to igro izgubili. \n ' 'Več sreče prihodnjič'
 
 def izpis_napake():
-    return 'Nepravilen vnos. Za pomoč pritisni p.'
+    return '\n Nepravilen vnos. Za pomoč pritisni p.'
 
 def pravilen_vnos(igra, vnos):
     vnos1 = vnos.split(' ')
@@ -121,7 +124,7 @@ def pozeni_vmesnik():
                         if ponovni_zagon == '1':
                             pozeni_vmesnik()
                         else:
-                            break
+                            sys.exit()
                     if rezultat_ugiba == PORAZ:
                         print(izpis_igre(igra))
                         print(izpis_poraza())
@@ -129,6 +132,6 @@ def pozeni_vmesnik():
                         if ponovni_zagon == '1':
                             pozeni_vmesnik()
                         else:
-                            break
+                            sys.exit()
 
 pozeni_vmesnik()
