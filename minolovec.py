@@ -43,7 +43,7 @@ def ugibaj():
     celica = bottle.request.getunicode('celica').split(' ')
     vrstica = int(celica[0]) + 1
     stolpec = int(celica[1]) + 1
-    minolovec.ugibaj(id_igre, vrstica, stolpec, False)
+    minolovec = minolovec.ugibaj(id_igre, vrstica, stolpec, False)
     bottle.redirect('/igra/')
 
 @bottle.post('/igra_zastavice/')
@@ -63,7 +63,7 @@ def postavi_zastavico():
     celica = bottle.request.getunicode('celica').split(' ')
     vrstica = int(celica[0]) + 1
     stolpec = int(celica[1]) + 1
-    minolovec.ugibaj(id_igre, vrstica, stolpec, True)
+    minolovec = minolovec.ugibaj(id_igre, vrstica, stolpec, True)
     bottle.redirect('/igra_zastavice/')
 
 @bottle.post('/igra/')

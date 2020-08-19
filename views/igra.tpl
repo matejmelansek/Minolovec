@@ -1,4 +1,4 @@
-%rebase('base.tpl', title='Minolovec')ž
+%rebase('base.tpl', title='Minolovec')
 %import model
 
 <h2>Če želiš postavljati zastavice pritisni na gumb: Postavljaj zastavice</h2>
@@ -16,8 +16,8 @@
                             <img src='../img/minolovec_{{celica.mine_v_okolici(v,s)}}.png' alt='{{celica.mine_v_okolici(v,s)}}'>
                         % elif celica.odprta == False and celica.zastavica == True:
                             <img src='../img/minolovec_zastavica.png' alt='F'>
-                        % elif celica.odprta == False and celica.zastavica == Falsse:
-                            <input type='submit' name='celica' value='{{v}} {{s}}'><img src='../img/minolovec_zaprta.png' alt='X'></button>
+                        % elif celica.odprta == False and celica.zastavica == False:
+                            <input type='button' name='celica' value='{{v}} {{s}}'><img src='../img/minolovec_zaprta.png' alt='X'></button>
                         %end
                     </td>
                 %end

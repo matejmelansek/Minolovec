@@ -50,6 +50,12 @@
     border-radius: 4px;
     cursor: pointer;
   }
+  img {
+  float: left;
+  width:  40px;
+  height: 40px;
+  background-size: cover;
+  }
 </style>
 
 <body>
