@@ -9,15 +9,16 @@
             <tr>
                 % for s in range(st_stolpcev):
                     <td>
-                        % celica = igra.postavitev_min[v][s]
+                        % mreza = igra.postavitev_min
+                        % celica = mreza[v][s]
                         % if celica.odprta == True and celica.mina == True:
                             <img src='../img/minolovec_mina.png' alt='M'>
                         % elif celica.odprta == True and celica.mina == False:
-                            <img src='../img/minolovec_{{celica.mine_v_okolici(v,s)}}.png' alt='{{celica.mine_v_okolici(v,s)}}'>
+                            <img src='../img/minolovec_{{igra.mine_v_okolici(v,s)}}.png' alt='{{igra.mine_v_okolici(v,s)}}'>
                         % elif celica.odprta == False and celica.zastavica == True:
                             <img src='../img/minolovec_zastavica.png' alt='F'>
                         % elif celica.odprta == False and celica.zastavica == False:
-                            <input type='button' name='celica' value='{{v}} {{s}}'><img src='../img/minolovec_zaprta.png' alt='X'></button>
+                            <input type='image' name='celica1' value='{{v}} {{s}}' src='../img/minolovec_zaprta.png' alt='X'/>
                         %end
                     </td>
                 %end

@@ -33,16 +33,17 @@ def nova_igra():
 
 @bottle.get('/igra/')
 def pokazi_igro():
-    id_igre = int(bottle.request.get_cookie('id_igre', secret=SKRIVNOST))
+    id_igre = bottle.request.get_cookie('id_igre', secret=SKRIVNOST)
     [igra, st_vrstic, st_stolpcev, st_min, stanje] = minolovec.igre[id_igre]
     return bottle.template('igra.tpl', igra=igra, stanje=stanje, id_igre=id_igre, st_vrstic=st_vrstic, st_stolpcev=st_stolpcev, st_min=st_min)
 
 @bottle.post('/igra/')
 def ugibaj():
     id_igre = bottle.request.get_cookie('id_igre', secret=SKRIVNOST)
-    celica = bottle.request.getunicode('celica').split(' ')
-    vrstica = int(celica[0]) + 1
-    stolpec = int(celica[1]) + 1
+    celica1 = bottle.request.forms.getunicode('celica1')
+    celica2 = celica1.split(' ')
+    vrstica = int(celica2[0]) + 1
+    stolpec = int(celica2[1]) + 1
     minolovec = minolovec.ugibaj(id_igre, vrstica, stolpec, False)
     bottle.redirect('/igra/')
 

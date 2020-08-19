@@ -16,7 +16,7 @@
                         % elif celica.odprta == False and celica.zastavica == True:
                             <img src='../img/minolovec_zastavica.png' alt='F'>
                         % elif celica.odprta == False and celica.zastavica == False:
-                            <input type='button' name='celica' value='{{v}} {{s}}'><img src='../img/minolovec_zaprta.png' alt='X'></button>
+                            <input type='button' name='celica' value='{{v}} {{s}}' src='../img/minolovec_zaprta.png' alt='X'></button>
                         %end
                     </td>
                 %end

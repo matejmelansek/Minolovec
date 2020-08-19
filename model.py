@@ -175,5 +175,5 @@ class Minolovec:
     
     def ugibaj(self, id_igre, vrstica, stolpec, zastavica):
         [igra, st_vrstic, st_stolpcev, st_min, stanje] = self.igre[id_igre]
-        poskus = igra.ugibaj(vrstica, stolpec, zastavica)
+        poskus = igra.ugibaj(str(vrstica), str(stolpec), zastavica)
         self.igre[id_igre] = [igra, st_vrstic, st_stolpcev, st_min, poskus]
