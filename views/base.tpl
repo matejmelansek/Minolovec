@@ -1,21 +1,62 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <meta name="viewport" content="width-device-width, initial-scale=1.0"/>
-    </head>
+
+<head>
+  <title> Minolovec </title>
+</head>
+
+<h1>Minolovec</h1>
+
+<style>
+  body {    
+    background-color: #42F5EF;
+  }
+  h1 {
+    color:black;
+    text-align: center;
+    font-family: verdana;
+    font-size: 40px;
+    margin-bottom: 20px
+  }
+  h2 {
+    font-family: verdana;
+    font-size: 30px;
+    margin-left: 10px
+  }
+  p {
+    font-family: verdana;
+    margin-left: 10px
+  }
+  li {
+    margin-left: 10px;
+    font-family: verdana;
+  }
+  input[type=text], select {
+    width: 15%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  input[type=submit] {
+    width: 30%;
+    background-color: #EB3A34;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+</style>
 
 <body>
-    <h1>Minolovec</h1>
 
-    <blockquote>
-      Dobrodošel v igri minolovec!
-    </blockquote>
-
-    <div class="container">
-        {{!base}}
-    </div>
+    {{!base}}
 
 </body>
+
 
 </html>

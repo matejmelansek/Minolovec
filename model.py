@@ -161,10 +161,10 @@ class Minolovec:
         self.igre = {}
     
     def prost_id_igre(self):
-        if len(self.igre) == 0:
-            return 0
-        else:
+        if self.igre.keys():
             return max(self.igre.keys()) + 1
+        else:
+            return 0
 
     def nova_igra(self, st_vrstic, st_stolpcev, st_min):
         id_igre = self.prost_id_igre()
