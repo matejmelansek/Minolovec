@@ -35,8 +35,8 @@
 
 % if stanje == model.ZMAGA:
 <h2>ČESTITAM, POČISTILI STE MINSKO POLJE!</h2>
-<p>Če želite igrati ponovno na enako velikem minskem polju pritisnite gumb: Nova igra - enaka mreža <br> 
-Če pa želite novo minsko polje pritisnite gumb: Nova igra - nova mreža</p>
+<p>Če želite igrati ponovno na enako velikem minskem polju pritisnite gumb: Nova igra - enaka mreža. <br> 
+Če pa želite novo minsko polje pritisnite gumb: Nova igra - nova mreža.</p>
 <form action='/nova_igra/' method='post'>
     <button type='submit' name='tezavnost' value='{{st_vrstic}} {{st_stolpcev}} {{st_min}}'>Nova igra - enaka mreža</button>
 </form>
@@ -46,8 +46,8 @@
 
 % elif stanje == model.PORAZ:
 <h2>ŽAL STE ZADELI MINO.</h2>
-<p>Če želite igrati ponovno na enako velikem minske polju pritisnite gumb: Nova igra - enaka mreža <br> 
-Če pa želite novo minsko polje pritisnite gumb: Nova igra - nova mreža</p>
+<p>Če želite igrati ponovno na enako velikem minske polju pritisnite gumb: Nova igra - enaka mreža. <br> 
+Če pa želite novo minsko polje pritisnite gumb: Nova igra - nova mreža.</p>
 <form action='/nova_igra/' method='post'>
     <button type='submit' name='tezavnost' value='{{st_vrstic}} {{st_stolpcev}} {{st_min}}'>Nova igra - enaka mreža</button>
 </form>
