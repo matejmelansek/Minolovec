@@ -12,13 +12,13 @@
                         % mreza = igra.postavitev_min
                         % celica = mreza[v][s]
                         % if celica.odprta == True and celica.mina == True:
-                            <img src='../img/minolovec_mina.png' alt='M'>
+                            <img src='../img/minolovec_mina.jpg' width='30px' height='30px' alt='M'>
                         % elif celica.odprta == True and celica.mina == False:
-                            <img src='../img/minolovec_{{igra.mine_v_okolici(v,s)}}.png' alt='{{igra.mine_v_okolici(v,s)}}'>
+                            <img src='../img/minolovec_{{igra.mine_v_okolici(v,s)}}.png' width='30px' height='30px' alt='{{igra.mine_v_okolici(v,s)}}'>
                         % elif celica.odprta == False and celica.zastavica == True:
-                            <img src='../img/minolovec_zastavica.png' alt='F'>
+                            <img src='../img/minolovec_zastavica.png' width='30px' height='30px' alt='F'>
                         % elif celica.odprta == False and celica.zastavica == False:
-                            <input type='image' name='celica1' value='{{v}} {{s}}' src='../img/minolovec_zaprta.png' alt='X'/>
+                            <button id='close-image' name='celica1' value='{{v}} {{s}}'><img src='../img/minolovec_zaprta.png' width='30px' height='30px'></button>
                         %end
                     </td>
                 %end
@@ -26,19 +26,31 @@
         %end
     </table>
 </form>
-
-<form action="/igra_zastavice/" method="post">
-    <input type='submit' name='postavljaj_zastavice' value='Postavljaj zastavice'>
-</form>
 <br>
+%if not(stanje == model.ZMAGA or stanje == model.PORAZ):
+<form action='/igra_zastavice/' method='get'>
+    <button type='submit'>Postavljaj zastavice</button>
+</form>
+%end
+
 % if stanje == model.ZMAGA:
-<h1>ČESTITAM, POČISTILI STE MINSKO POLJE!</h1>
-<form action="/nova_igra/" method="post">
-    <button>Nova igra</button>
+<h2>ČESTITAM, POČISTILI STE MINSKO POLJE!</h2>
+<p>Če želite igrati ponovno na enako velikem minskem polju pritisnite gumb: Nova igra - enaka mreža <br> 
+Če pa želite novo minsko polje pritisnite gumb: Nova igra - nova mreža</p>
+<form action='/nova_igra/' method='post'>
+    <button type='submit' name='tezavnost' value='{{st_vrstic}} {{st_stolpcev}} {{st_min}}'>Nova igra - enaka mreža</button>
+</form>
+<form action='/nova_igra1/' method='get'>
+    <button type='submit'>Nova igra - nova mreza</button>
 </form>
 
 % elif stanje == model.PORAZ:
-<h1>ŽAL STE ZADELI MINO.</h1>
-<form action="/nova_igra/" method="post">
-    <button>Nova igra</button>
+<h2>ŽAL STE ZADELI MINO.</h2>
+<p>Če želite igrati ponovno na enako velikem minske polju pritisnite gumb: Nova igra - enaka mreža <br> 
+Če pa želite novo minsko polje pritisnite gumb: Nova igra - nova mreža</p>
+<form action='/nova_igra/' method='post'>
+    <button type='submit' name='tezavnost' value='{{st_vrstic}} {{st_stolpcev}} {{st_min}}'>Nova igra - enaka mreža</button>
+</form>
+<form action='/nova_igra1/' method='get'>
+    <button type='submit'>Nova igra - nova mreža</button>
 </form>
