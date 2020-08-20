@@ -24,12 +24,11 @@
     </form>
 
     <br>
-    <br>
 
     <p>
         Če vam velikost minskega polja in število min ne ustrezata, v prazna polja napišite želeno <br>
         število vrstic, stolpcev in min, nato pritisnite gumb: Po meri. V polja vpisujte le naravna števila <br>
         (in ne drugih simbolov kot so presledki, črke,...). Najmanjše možno minsko polje je velikosti 2x2, največje <br>
-        pa 24x30. Število min mora biti vsaj za 1 manjše od velikosti minskega polja.
+        pa 24x30. Število min mora biti vsaj za 1 manjše od velikosti minskega polja (največ 668 min).
     </p>
     
